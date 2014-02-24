@@ -19,7 +19,7 @@ private:
 	SaveSystem ss;
 	void setPlayerDirection(int deltaX, int deltaY);
 	void drawHud();
-	void checkCameraAxisMovements(bool& moveCameraHorizontaly, 
+	void checkCameraMovement(bool& moveCameraHorizontally, 
 			bool& moveCameraVertically, int deltaX, int deltaY,
 			int& playerX, int& playerY);
 
@@ -30,6 +30,7 @@ public:
 	void move(int deltaX, int deltaY);
 	void init();
 	void update();
+	bool gameOver();
 	SDL_Rect getLevelDimension();
 	static SDL_Surface* loadImage(std::string filename);
 	static bool checkCollision(SDL_Rect A, SDL_Rect B);

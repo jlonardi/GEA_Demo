@@ -39,7 +39,6 @@ public:
 	Level(Level& other);
 	Level& operator=(Level& other);
 	void load();
-	bool touchesWall(SDL_Rect box);
 	void draw(View& view);
 	SDL_Rect getFinish();
 	SDL_Rect getSize();

@@ -17,10 +17,12 @@ Logic& Logic::operator=(const Logic& other)
 	return *this;
 }
 
+/*
+	Helper function to set up the players movement direction
+	and puts the player to move if needed.
+*/
 void Logic::setPlayerDirection(int deltaX, int deltaY)
 {
-	// Sets the players facing direction and
-	// checks if movment is needed or not
 	if(deltaX < 0) 
 	{
 		player.setMoving(true);
@@ -43,7 +45,11 @@ void Logic::setPlayerDirection(int deltaX, int deltaY)
 	}
 }
 
-void Logic::checkCameraAxisMovements(bool& moveCameraHorizontaly, bool& moveCameraVertically,
+/*
+	Helper function to check if it is ok to move the camera horizontally/vertically.
+*/
+
+void Logic::checkCameraMovement(bool& moveCamerahorizontally, bool& moveCameraVertically,
 									 int deltaX, int deltaY, int& playerX, int& playerY)
 {
 	SDL_Rect levelSize = level.getSize();
@@ -68,11 +74,11 @@ void Logic::checkCameraAxisMovements(bool& moveCameraHorizontaly, bool& moveCame
 		if(playerPosition.x <= camera.w/2)
 		{
 			playerX = deltaX * playerVelocity;
-			moveCameraHorizontaly = false;
+			moveCamerahorizontally = false;
 			if(playerPosition.x + playerX > camera.w/2) 
 			{
 				playerX = camera.w/2 - playerPosition.x ;
-				moveCameraHorizontaly = true;
+				moveCamerahorizontally = true;
 			}
 		}
 	} else if(cameraCollidesRightEdge)
@@ -80,11 +86,11 @@ void Logic::checkCameraAxisMovements(bool& moveCameraHorizontaly, bool& moveCame
 		if(playerPosition.x >= camera.w/2)
 		{
 			playerX = deltaX * playerVelocity;
-			moveCameraHorizontaly = false;
+			moveCamerahorizontally = false;
 			if(playerPosition.x + playerX < camera.w/2)
 			{
 				playerX = camera.w/2 - playerPosition.x ;
-				moveCameraHorizontaly = true;
+				moveCamerahorizontally = true;
 			}
 		}
 	}
@@ -129,13 +135,13 @@ void Logic::move(int deltaX, int deltaY)
 
 	SDL_Rect levelSize = level.getSize();
 
-	bool moveCameraHorizontaly = true;
+	bool moveCamerahorizontally = true;
 	bool moveCameraVertically = true;
 
-	checkCameraAxisMovements(moveCameraHorizontaly, moveCameraVertically, deltaX, deltaY, playerX, playerY);
+	checkCameraMovement(moveCamerahorizontally, moveCameraVertically, deltaX, deltaY, playerX, playerY);
 
 	// Move camera in x-axis
-	if(moveCameraHorizontaly)
+	if(moveCamerahorizontally)
 	{	
 		if(camera.x + cameraX >= 0 && camera.x + camera.w + cameraX <= levelSize.w)
 		{

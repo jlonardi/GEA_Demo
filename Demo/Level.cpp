@@ -197,11 +197,6 @@ int Level::xmlAttributeToInt(rapidxml::xml_node<>* node, std::string attr)
 	return value;
 }
 
-bool Level::touchesWall(SDL_Rect box)
-{
-	return false;
-}
-
 void Level::draw(View& view)
 {
 	SDL_Rect camera = view.getCamera();
